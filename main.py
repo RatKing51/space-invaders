@@ -8,6 +8,7 @@ import bullet
 from bullet import *
 import enemy
 from enemy import *
+import random
 
 
 pygame.init()
@@ -25,7 +26,7 @@ user = Player(200, 564, False, 'assets/player.png', 64, 64)
 
 bullet_ = Bullet(400, 600)
 
-enemy_ = Enemy(50, 50, 'assets/enemy.png')
+
 
 game = False
 
@@ -33,8 +34,12 @@ shoot = False
 
 
 enemy_group = pygame.sprite.Group()
+x = random.randrange(32, 100)
 
-enemy_group.add(enemy_)
+for i in range(5):
+    
+    enemy_ = Enemy(x, 50, 'assets/enemy.png')
+    enemy_group.add(enemy_)
 
 #Images
 bg = pygame.image.load('assets/background.png')
@@ -74,7 +79,7 @@ while run:
     # main game
     if game:
         if pygame.sprite.groupcollide(enemy_group, user.pew_group, dokilla=True, dokillb=True):
-            print("yes")
+            enemy_.kill_ = True
         user.draw(screen)
         user.update()
         user.pew_group.draw(screen)

@@ -14,6 +14,7 @@ class Enemy(pygame.sprite.Sprite):
         self.rect.center = (self.x, self.y)
         self.dir = 1
         self.kill_ = False
+        
     
     def draw(self, window):
         window.blit(self.image, self.rect)
@@ -32,4 +33,7 @@ class Enemy(pygame.sprite.Sprite):
             self.rect.move_ip(-1, 0)
         if self.dir == 1:
            self.rect.move_ip(1, 0)
+        
+        if self.kill_:
+            self.kill()
         
