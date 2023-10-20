@@ -17,10 +17,10 @@ class Bullet(pygame.sprite.Sprite):
 
     def update(self, other_rect):
         self.rect.y -= 7
-        collide = pygame.Rect.colliderect(self.rect, other_rect)
+        
+
+       
 
         if self.rect.bottom <= 0:
             self.kill()
-        elif collide:
-            self.tell_kill = True
-            self.kill()
+       

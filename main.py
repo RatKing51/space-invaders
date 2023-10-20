@@ -23,13 +23,18 @@ button1 = Button(164, 236, 'blue', False, 64, 64, "Play")
 
 user = Player(200, 564, False, 'assets/player.png', 64, 64)
 
-bullet_ = Bullet(0, 0)
+bullet_ = Bullet(400, 600)
 
-enemy_ = Enemy(50, 50, False, 'assets/enemy.png')
+enemy_ = Enemy(50, 50, 'assets/enemy.png')
 
 game = False
 
 shoot = False
+
+
+enemy_group = pygame.sprite.Group()
+
+enemy_group.add(enemy_)
 
 #Images
 bg = pygame.image.load('assets/background.png')
@@ -68,14 +73,17 @@ while run:
 
     # main game
     if game:
+        if pygame.sprite.groupcollide(enemy_group, user.pew_group, dokilla=True, dokillb=True):
+            print("yes")
         user.draw(screen)
         user.update()
         user.pew_group.draw(screen)
         user.pew_group.update(enemy_.rect)
         enemy_.draw(screen)
         enemy_.update(bullet_.rect)
-        if bullet_.tell_kill:
-            enemy_.rect.y = 50
+        
+    
+              
 
 
 
