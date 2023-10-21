@@ -35,10 +35,16 @@ shoot = False
 
 enemy_group = pygame.sprite.Group()
 x = random.randrange(32, 100)
+enemy_img = []
+enemy_x = []
+enemy_y = []
+numOfEnemy = 5
 
-for i in range(5):
-    
-    enemy_ = Enemy(x, 50, 'assets/enemy.png')
+for i in range(numOfEnemy):
+    enemy_img.append(pygame.image.load('assets/enemy.png'))
+    enemy_x.append(random.randint(32, 350))
+    enemy_y.append(random.randint(0, 50))
+    enemy_ = Enemy(enemy_x[i], enemy_y[i], enemy_img[i])
     enemy_group.add(enemy_)
 
 #Images
@@ -84,8 +90,8 @@ while run:
         user.update()
         user.pew_group.draw(screen)
         user.pew_group.update(enemy_.rect)
-        enemy_.draw(screen)
-        enemy_.update(bullet_.rect)
+        enemy_group.draw(screen)
+        enemy_group.update(bullet_.rect)
         
     
               

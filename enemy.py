@@ -9,7 +9,7 @@ class Enemy(pygame.sprite.Sprite):
         self.x = int(x)
         self.y = int(y)
         self.img_path = img_path
-        self.image = pygame.image.load(self.img_path)
+        self.image = self.img_path
         self.rect = self.image.get_rect()
         self.rect.center = (self.x, self.y)
         self.dir = 1
