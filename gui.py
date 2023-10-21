@@ -34,5 +34,20 @@ class Button():
             else:
                 self.pressed = False
 
+class Text():
+
+    def __init__(self, x, y, size, color, text):
+        super().__init__()
+        self.x = int(x)
+        self.y = int(y)
+        self.size = size
+        self.color = color
+        self.font = pygame.font.SysFont('Georgia', self.size)
+        self.text = text
+        self.message = self.font.render(self.text, True, self.color)
+
+    def draw(self, window):
+        window.blit(self.message, (self.x, self.y))
+
 
         

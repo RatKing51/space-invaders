@@ -1,6 +1,7 @@
 from typing import Any
 import pygame
 from pygame import *
+import random
 
 class Enemy(pygame.sprite.Sprite):
 
@@ -10,29 +11,23 @@ class Enemy(pygame.sprite.Sprite):
         self.y = int(y)
         self.img_path = img_path
         self.image = self.img_path
+        self.image = pygame.transform.scale(self.image, (32, 32))
         self.rect = self.image.get_rect()
         self.rect.center = (self.x, self.y)
-        self.dir = 1
+        self.dir = random.randint(0, 1)
         self.kill_ = False
+        self.speed = 0.75
         
     
     def draw(self, window):
         window.blit(self.image, self.rect)
 
-    def update(self, other_rect):
+    def update(self, other_rect, window):
         
+    
+        self.rect.move_ip(0, 1)
         
-        if self.rect.centerx == 368:
-           self.dir = 0
-           self.rect.move_ip(0, 5)
-        if self.rect.centerx == 32:
-           self.dir = 1
-           self.rect.move_ip(0, 5)
 
-        if self.dir == 0:
-            self.rect.move_ip(-1, 0)
-        if self.dir == 1:
-           self.rect.move_ip(1, 0)
         
         if self.kill_:
             self.kill()

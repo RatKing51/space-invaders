@@ -16,7 +16,7 @@ class Bullet(pygame.sprite.Sprite):
         win.blit(self.image, self.rect)
 
     def update(self, other_rect):
-        self.rect.y -= 7
+        self.rect.y -= 10
         
 
        

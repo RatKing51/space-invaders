@@ -9,6 +9,7 @@ from bullet import *
 import enemy
 from enemy import *
 import random
+import time
 
 
 pygame.init()
@@ -26,26 +27,44 @@ user = Player(200, 564, False, 'assets/player.png', 64, 64)
 
 bullet_ = Bullet(400, 600)
 
-
+score_text = Text(0, 0, 20, 'white', "Score")
 
 game = False
 
 shoot = False
 
+clock = pygame.time.Clock()
 
-enemy_group = pygame.sprite.Group()
-x = random.randrange(32, 100)
-enemy_img = []
-enemy_x = []
-enemy_y = []
-numOfEnemy = 5
 
-for i in range(numOfEnemy):
-    enemy_img.append(pygame.image.load('assets/enemy.png'))
-    enemy_x.append(random.randint(32, 350))
-    enemy_y.append(random.randint(0, 50))
-    enemy_ = Enemy(enemy_x[i], enemy_y[i], enemy_img[i])
-    enemy_group.add(enemy_)
+
+
+green_enemy1 = pygame.sprite.Group()
+red_enemy1 = pygame.sprite.Group()
+
+green1_x = []
+red1_x = []
+green1_y = []
+red1_y = []
+
+numOfgEnemy = 10
+numOfrEnemy = 5
+
+
+
+
+
+for i in range(numOfgEnemy):
+    green1_x.append(random.randrange(32, 332))
+    green1_y.append(random.randrange(0, 32))
+    enemy_ = Enemy(green1_x[i], green1_y[i], pygame.image.load('assets/enemy.png'))
+    green_enemy1.add(enemy_)
+
+for i in range(numOfrEnemy):
+    red1_x.append(random.randrange(32, 332))
+    red1_y.append(random.randrange(0, 32))
+    enemy_ = Enemy(red1_x[i], red1_y[i], pygame.image.load('assets/enemy1.png'))
+    red_enemy1.add(enemy_)
+
 
 #Images
 bg = pygame.image.load('assets/background.png')
@@ -84,18 +103,27 @@ while run:
 
     # main game
     if game:
-        if pygame.sprite.groupcollide(enemy_group, user.pew_group, dokilla=True, dokillb=True):
+        if pygame.sprite.groupcollide(green_enemy1, user.pew_group, dokilla=True, dokillb=True):
+            enemy_.kill_ = True
+        if pygame.sprite.groupcollide(red_enemy1, user.pew_group, dokilla=True, dokillb=True):
             enemy_.kill_ = True
         user.draw(screen)
         user.update()
         user.pew_group.draw(screen)
         user.pew_group.update(enemy_.rect)
-        enemy_group.draw(screen)
-        enemy_group.update(bullet_.rect)
+        green_enemy1.draw(screen)
+        green_enemy1.update(bullet_.rect, screen)
+        red_enemy1.draw(screen)
+        red_enemy1.update(bullet_.rect, screen)
+        score_text.draw(screen)
         
+    clock.tick(50)
     
               
 
 
 
     pygame.display.update()
+
+if __name__ == "__main__":
+    run = True

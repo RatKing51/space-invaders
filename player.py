@@ -18,7 +18,7 @@ class Player(pygame.sprite.Sprite):
         self.rect.center = (self.x, self.y)
         self.left_pressed = False
         self.right_pressed = False
-        self.speed = 2
+        self.speed = 7
         self.last_shot = pygame.time.get_ticks()
         self.pew_group = pygame.sprite.Group()
         self.spaced_pressed = False
@@ -39,7 +39,7 @@ class Player(pygame.sprite.Sprite):
             self.rect.x = 336
             self.rect.move_ip(-self.speed, 0)
 
-        cooldown = 100
+        cooldown = 300
 
         time_now = pygame.time.get_ticks()
         # shoot
