@@ -49,5 +49,9 @@ class Text():
     def draw(self, window):
         window.blit(self.message, (self.x, self.y))
 
+    def update(self, window, text):
+        self.text = text
+        window.blit(self.message, (self.x, self.y))
+
 
         

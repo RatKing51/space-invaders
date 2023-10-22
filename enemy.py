@@ -5,7 +5,7 @@ import random
 
 class Enemy(pygame.sprite.Sprite):
 
-    def __init__(self, x, y, img_path):
+    def __init__(self, x, y, img_path, health):
         super().__init__()
         self.x = int(x)
         self.y = int(y)
@@ -17,8 +17,9 @@ class Enemy(pygame.sprite.Sprite):
         self.dir = random.randint(0, 1)
         self.kill_ = False
         self.speed = 0.75
+        self.type = type
+        self.health = int(health)
         
-    
     def draw(self, window):
         window.blit(self.image, self.rect)
 
@@ -26,7 +27,9 @@ class Enemy(pygame.sprite.Sprite):
         
     
         self.rect.move_ip(0, 1)
-        
+
+        if self.health <= 0:
+            self.kill() 
 
         
         if self.kill_:
